@@ -14,12 +14,14 @@ const isValidPort = (port: string) => Number(port) && 0 <= Number(port) && Numbe
 export default class StaticFileServerPlugin extends Plugin {
     settings: StaticFileServerPluginSettings;
     webservers: StaticServer[];
+    staticServer: any; // export for other plugins
 
     async onload() {
         this.webservers = [];
         await this.loadSettings();
         this.restartServers();
         this.addSettingTab(new SettingTab(this.app, this));
+        this.staticServer = staticServer;   
     }
 
     shutDownServers() {
